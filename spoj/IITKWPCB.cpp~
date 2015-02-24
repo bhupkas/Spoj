@@ -1,0 +1,21 @@
+/* bhupkas */
+
+using namespace std;
+
+#include "bits/stdc++.h"
+
+typedef long long LL;
+
+int main()
+{
+	int t;
+	cin >> t;
+	LL n;
+	while(t--)
+	{
+		cin >> n;
+		LL ans = n/2;
+		
+	}
+	return 0;
+}

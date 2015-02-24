@@ -1,0 +1,20 @@
+/* bhupkas */
+
+using namespace std;
+
+#include "bits/stdc++.h"
+
+typedef long long LL;
+
+int main()
+{
+	while(1)
+	{
+		int n;
+		cin >> n;
+		if(!n)	break;
+		LL ans = (n * (n + 1) * (2 * n + 1) ) / 6;
+		cout << ans << endl;
+	}
+	return 0;
+}

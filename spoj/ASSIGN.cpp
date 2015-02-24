@@ -1,0 +1,58 @@
+/* bhupkas */
+
+using namespace std;
+
+#include "bits/stdc++.h"
+
+typedef long long LL;
+
+bool adj[20][20];
+
+LL A[1<<20];
+
+int n,i,j,mask,t,st,temp,re;
+
+int count(int num)
+{
+	re = 0 ;
+	while(num)
+	{
+		re += num & 1;
+		num /= 2;
+	}
+	return re;
+}
+
+int main()
+{
+	cin >> t;
+	while(t--)
+	{
+		cin >> n;
+		for(i = 0 ; i < (1<<n) ; ++i)	A[i] = 0LL;
+		for(i = 0 ; i < n ; ++i)
+		{
+			for(j = 0 ; j < n ; ++j)
+			{
+				cin >> temp ; 
+				if(temp)	adj[i][j] = true;
+				else		adj[i][j] = false;
+			}
+		}
+		A[0] = 1LL;
+		for(mask = 1 ; mask < (1<<n) ; mask++)
+		{
+			st = count(mask);
+			st--;
+			for(i = 0 ; i < n ; ++i)
+			{
+				if((mask & (1 << i))  && adj[st][i] )	
+				{
+					A[mask] += A[mask ^ (1 << i)];
+				}
+			}
+		}
+		cout << A[(1<<n) -1] << endl;
+	}
+	return 0;
+}

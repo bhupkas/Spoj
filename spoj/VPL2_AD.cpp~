@@ -1,0 +1,78 @@
+/* bhupkas */
+
+#include "iostream"
+#include "stdio.h"
+#include "algorithm"
+#include "vector"
+#include "string"
+#include "string.h"
+
+using namespace std;
+
+#define FOR(i,a,b)	for(i=a;i<b;i++)
+
+int n,m,ans;
+int dx[]={0,0,-1,1,1,-1,1,-1};
+int dy[]={-1,1,0,0,-1,1,1,-1};
+bool visited[6000][6000];
+char S[6000][6000];
+
+bool check(int x,int y)
+	{
+		if(x>=0 && x<n && y>=0 && y<m)	return true;
+		return false;
+	}
+
+void dfs(int x,int y)
+	{
+		visited[x][y]=true;
+		int i,j,xk,yk;
+		FOR(i,0,8)	
+			{
+				xk=x+dx[i];
+				yk=y+dy[i];
+				if(check(xk,yk) && !visited[xk][yk])
+					{
+						if(S[xk][yk]=='-')				dfs(xk,yk);
+						else if(S[xk][yk]<='8' && S[xk][yk]>='0')	visited[xk][yk]=true;
+					}
+			}
+	}	
+
+int main()	
+	{
+		int tc,i,j,t;
+		cin>>t;
+		FOR(tc,1,t+1)
+			{
+				cin>>n>>m;
+				getchar();
+				FOR(i,0,n)	scanf("%s",S[i]);
+				FOR(i,0,n)	FOR(j,0,m)	visited[i][j]=false;	
+				ans=0;
+				FOR(i,0,n)
+					{
+						FOR(j,0,m)
+							{
+								if(!visited[i][j] && S[i][j]=='-')	
+									{
+										ans++;
+										dfs(i,j);
+									}
+							}
+					}
+				FOR(i,0,n)	
+					{
+						FOR(j,0,m)
+							{
+								if(!visited[i][j] && S[i][j]<='8' && S[i][j]>='0')	
+									{
+										ans++;
+									}	
+							}
+					}
+				cout<<"Scenario #"<<tc<<": "<<ans<<endl;
+				getchar();
+			}
+		return 0;
+	}
